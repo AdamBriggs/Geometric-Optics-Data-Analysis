@@ -9,6 +9,8 @@ data <- read_sheet("https://docs.google.com/spreadsheets/d/1buK0ZxyTiJ1rPrUbCSbq
 names(data) <- c("Timestamp","Email","Understand Before","Understand After","Varied","Confidence","Conclusion","Teamwork",
                    "Group Work","Satisfaction","Benifit","Additional Thoughts","Item","Leader")
 
+data <- data[-c(1:6),]
+
 
 # Plotting Number vs String
 plot(factor(data$Item),data$Confidence)
@@ -78,3 +80,7 @@ ggplot(groupval, aes(After, fill = type)) +
 
 
 
+# ------------ Saving Images
+# plots.dir.path <- list.files(tempdir(), pattern="rs-graphics", full.names = TRUE); 
+# plots.png.paths <- list.files(plots.dir.path, pattern=".png", full.names = TRUE)
+# file.copy(from=plots.png.paths, to="/Users/adambriggs/Dropbox/College/Fall 2019/CAS 352/Research Project/Figures")
