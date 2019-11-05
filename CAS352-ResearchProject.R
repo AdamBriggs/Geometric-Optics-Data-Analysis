@@ -50,6 +50,8 @@ ggplot(data2, aes(PC1,PC2, col = Item, fill = Item)) +
 # -------------------------
 
 # Correlations Between Variables and PCs
+# Note that the correlation needs to be defined after both sets of data are implimented. 
+# This just shows which quetsions have the highest correlation with the PCA analysis of the seperability.
 corr <- cor(data2[,3:11],data2[,15:16])
 corr
 
