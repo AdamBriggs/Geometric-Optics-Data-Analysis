@@ -15,6 +15,7 @@ data <- data[-c(1:6),]
 # Plotting Number vs String
 plot(factor(data$Item),data$Confidence)
 
+
 # Perform Principal Component Analysis on Data
 pca <- prcomp(data[3:11], scale = TRUE)
 
@@ -49,7 +50,7 @@ ggplot(data2, aes(PC1,PC2, col = Item, fill = Item)) +
 # -------------------------
 
 # Correlations Between Variables and PCs
-corr <- cor(data[,3:11],data2[,15:16])
+corr <- cor(data2[,3:11],data2[,15:16])
 corr
 
 # Plotting Histogram For Understanding Before
@@ -65,18 +66,6 @@ groupval <- rbind(BS, BG)
 ggplot(groupval, aes(Before, fill = type)) +
   geom_density(alpha = 0.7, fill = 'steelblue')
 
-# Plotting Histogram For Understanding After
-BS <- as.data.frame(data$`Understand After`[1:20])
-colnames(BS) <- c("After")
-BS$type <- 'Solo'
-
-BG <-as.data.frame(data$`Understand After`[21:40])
-colnames(BG) <- c("After")
-BG$type <- 'Group'
-
-groupval <- rbind(BS, BG)
-ggplot(groupval, aes(After, fill = type)) +
-  geom_density(alpha = 0.5)
 
 
 
