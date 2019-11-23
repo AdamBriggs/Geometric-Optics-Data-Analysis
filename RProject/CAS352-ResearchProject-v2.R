@@ -44,6 +44,7 @@ ggplot(data2, aes(PC1,PC2, col = Item, fill = Item)) +
   theme(plot.title = element_text(lineheight=.8, face="bold")) +
   theme(plot.title = element_text(hjust = 0.5),plot.subtitle = element_text(hjust = 0.5)) +
   xlab("PC1 (Arb. Unit)") + ylab("PC2 (Arb. Unit)") +
+  theme(text = element_text(size=18)) +
   theme(axis.line = element_line(colour = "black"),
         panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
@@ -142,6 +143,7 @@ ggplot(data2, aes(x=Confidence, fill=Item)) +
   ggtitle("Histogram of Brainstorming Results", subtitle = "Confidence in Answer") +
   theme(plot.title = element_text(lineheight=.8, face="bold")) +
   theme(plot.title = element_text(hjust = 0.5),plot.subtitle = element_text(hjust = 0.5)) +
+  theme(text = element_text(size=18)) +
   theme(axis.line = element_line(colour = "black"),
         panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
