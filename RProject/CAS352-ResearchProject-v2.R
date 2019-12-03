@@ -7,6 +7,7 @@ library(googledrive)
 library(corrgram)
 library(dplyr)
 library(stargazer)
+library(data.table)
 
 data <- read_sheet("https://docs.google.com/spreadsheets/d/1buK0ZxyTiJ1rPrUbCSbql0RezCqn8-XJJ-b40xtPVSw/edit#gid=827708374")
 names(data) <- c("Timestamp","Email","Understand Before","Understand After","Variance in Answer","Confidence","Conclusion","Teamwork",
@@ -245,4 +246,33 @@ ggplot(data2, aes(x=Benifit, fill=Item)) +
         panel.border = element_blank(),
         panel.background = element_blank()) 
 dev.off()
+
+# ------------------------ Bar Of Average Questionaire ------------------------------------------
+mut <- as.data.frame(t(as.matrix(mu)))
+mut <- mut[-c(1),]
+mut$Questions<-c("Understand Before","Understand After","Variance in Answer","Confidence","Conclusion","Teamwork",
+                 "Group Work","Satisfaction","Benifit")
+dfm <- melt(mut[,c('Questions','V1','V2')],id.vars = 1)
+
+
+jpeg("Questionaire.jpeg", units="in", width=11, height=8, res=300)
+ggplot(dfm,aes(x = Questions,y = as.numeric(value))) + 
+  geom_bar(aes(fill = variable),stat = "identity",position = "dodge",alpha = 0.75,col = "black")+
+  scale_fill_discrete(name = "Brainstorming Type", labels = c("Group", "Individual")) +
+  scale_y_continuous(breaks=c(1,2,3,4,5,6,7,8,9,10),expand = c(0,0))+
+  xlab("Questions")+
+  ylab("Counts")+
+  ggtitle("Post Brainstorming Questionaire", subtitle = "Mean Results/Brainstorming Type") +
+  theme(plot.title = element_text(lineheight=.8, face="bold")) +
+  theme(plot.title = element_text(hjust = 0.5),plot.subtitle = element_text(hjust = 0.5)) +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))+
+  theme(text = element_text(size=18)) +
+  theme(axis.line = element_line(colour = "black"),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.border = element_blank(),
+        panel.background = element_blank()) 
+dev.off()
+
+
 
